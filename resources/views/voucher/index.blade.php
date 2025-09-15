@@ -9,20 +9,10 @@
         @csrf
         <div class="row g-2">
             {{-- Voucher Code Input --}}
-            <div class="col-md-6">
+            <div class="col">
                 <input type="text" name="voucher_code" class="form-control" placeholder="Enter voucher code" required>
             </div>
 
-            {{-- Jenis Hadiah Dropdown --}}
-            <div class="col-md-4">
-                <select name="jenis_hadiah" class="form-select" required>
-                    <option value="" disabled selected>-- Pilih Jenis Hadiah --</option>
-                    <option value="Logam Mulia 50g">Logam Mulia 50g</option>
-                    <option value="Logam Mulia 25g">Logam Mulia 25g</option>
-                    <option value="Logam Mulia 10g">Logam Mulia 10g</option>
-                    <option value="Voucher Belanja">Voucher Belanja</option>
-                </select>
-            </div>
 
             {{-- Search Button --}}
             <div class="col-md-2">
@@ -59,5 +49,41 @@
             </div>
         </div>
     @endisset
+    {{-- Daftar Pemenang --}}
+<div class="card mt-4">
+    <div class="card-body">
+        <h5>Daftar Pemenang</h5>
+
+        @if($winners->isEmpty())
+            <p class="text-muted">Belum ada pemenang.</p>
+        @else
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Voucher Code</th>
+                        <th>Full Name</th>
+                        <th>Customer ID</th>
+                        <th>Promo</th>
+                        <th>Jenis Hadiah</th>
+                        <th>Tanggal Menang</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($winners as $winner)
+                        <tr>
+                            <td>{{ $winner->voucher_code }}</td>
+                            <td>{{ $winner->full_name }}</td>
+                            <td>{{ $winner->customer_id }}</td>
+                            <td>{{ $winner->promo_name }}</td>
+                            <td>{{ $winner->gift_type }}</td>
+                            <td>{{ $winner->created_at }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+    </div>
+</div>
+
 </div>
 @endsection

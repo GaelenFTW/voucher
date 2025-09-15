@@ -11,7 +11,7 @@ class VoucherController extends Controller
     public function index()
     {
         $winners = \App\Models\Winner::latest()->get(); // ambil semua pemenang
-        return view('voucher.winner');
+        return view('voucher.index', compact('winners'));
     }
 
     public function search(Request $request)
